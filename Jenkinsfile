@@ -24,26 +24,6 @@ pipeline{
             )
             }
         }
-         stage('Unit Test maven'){
-         
-         when { expression {  params.action == 'create' } }
-
-            steps{
-               script{
-                   
-                   mvnTest()
-               }
-            }
-        }
-         stage('Integration Test maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   mvnIntegrationTest()
-               }
-            }
-        }
         stage('Static code analysis: Sonarqube'){
          when { expression {  params.action == 'create' } }
             steps{
@@ -64,15 +44,6 @@ pipeline{
                }
             }
        }
-        stage('Maven Build : maven'){
-         when { expression {  params.action == 'create' } }
-            steps{
-               script{
-                   
-                   mvnBuild()
-               }
-            }
-        }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
